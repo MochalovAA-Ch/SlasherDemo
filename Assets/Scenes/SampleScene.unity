@@ -504,7 +504,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1513761, y: 1}
+    m_SensorSize: {x: 1.4330986, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -649,7 +649,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1513761, y: 1}
+    m_SensorSize: {x: 1.4330986, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -918,7 +918,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1513761, y: 1}
+    m_SensorSize: {x: 1.4330986, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1281,7 +1281,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1513761, y: 1}
+    m_SensorSize: {x: 1.4330986, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2681,6 +2681,10 @@ PrefabInstance:
       propertyPath: cameraTr
       value: 
       objectReference: {fileID: 146268562}
+    - target: {fileID: 3028686844860209468, guid: 8131c1472e6aca146b1e231a4f9fcc6d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3279385646858064285, guid: 8131c1472e6aca146b1e231a4f9fcc6d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2727,6 +2731,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8131c1472e6aca146b1e231a4f9fcc6d, type: 3}
+--- !u!1 &3028686845593141865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2794878784842304295, guid: 8131c1472e6aca146b1e231a4f9fcc6d, type: 3}
+  m_PrefabInstance: {fileID: 3028686845593141864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3028686845593141866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3028686845593141865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303a2cb078c2f6740a1e672fbb307ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTr: {fileID: 146268562}
+  characterData: {fileID: 11400000, guid: 00029f03fdc2a914c82087c8f9ca81a4, type: 2}
 --- !u!1001 &5756802658326745501
 PrefabInstance:
   m_ObjectHideFlags: 0
