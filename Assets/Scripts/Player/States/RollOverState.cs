@@ -8,8 +8,12 @@ public class RollOverState : State
     Vector3 direction;
 
     Timer timer = new Timer( 1f );
-    public override void OnStateEnter( StateMachine stateMachine )
+
+    CharacterStateMachine stateMachine;
+    public override void OnStateEnter( StateMachine stateMachine_ )
     {
+        ShouldExit = false;
+        this.stateMachine = stateMachine_ as CharacterStateMachine;
         ySpeed = -9.8f;
         float x = Input.GetAxis( "Horizontal" );
         float z = Input.GetAxis( "Vertical" );
@@ -18,23 +22,26 @@ public class RollOverState : State
         direction = Quaternion.AngleAxis( stateMachine.GetCameraRotationEulers().y, Vector3.up ) * direction;
         direction.Normalize();
 
+        stateMachine.Animator.SetBool("RollOver", true);
+        stateMachine.MoveComponent.MultiplyHeght(0.5f);
         timer.ResetTimer();
-
     }
 
     public override void OnStateExit( StateMachine stateMachine )
     {
-
+        this.stateMachine.Animator.SetBool("RollOver", false);
+        this.stateMachine.MoveComponent.SetDefaultHeight();
     }
 
-    public override void UpdateState( StateMachine stateMachine )
+    public override void UpdateState()
     {
         if( timer.CheckTimer( Time.deltaTime ) )
         {
+            ShouldExit = true;
             return;
         }
 
-        if ( stateMachine.CharacterController.isGrounded )
+        if ( stateMachine.MoveComponent.IsGrounded() )
         {
             ySpeed = -stateMachine.CharacterData.Gravity;
         }
@@ -43,21 +50,8 @@ public class RollOverState : State
             ySpeed -= stateMachine.CharacterData.Gravity;
         }
 
-
-
         Vector3 veritcal = new Vector3( 0, ySpeed, 0 );
 
-        stateMachine.CharacterController.Move( ( direction * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        stateMachine.MoveComponent.Move( ( direction * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
     }
 }

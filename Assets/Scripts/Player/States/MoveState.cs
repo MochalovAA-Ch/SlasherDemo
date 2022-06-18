@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class MoveState : State
 {
+    CharacterStateMachine stateMachine;
     float ySpeed;
     public override void OnStateEnter( StateMachine stateMachine )
     {
+        this.stateMachine = stateMachine as CharacterStateMachine;
         ySpeed = -9.8f;
     }
 
@@ -14,9 +16,8 @@ public class MoveState : State
 
     }
 
-    public override void UpdateState( StateMachine stateMachine )
+    public override void UpdateState( )
     {
-        
         float x = Input.GetAxis( "Horizontal" );
         float z = Input.GetAxis( "Vertical" );
 
@@ -43,7 +44,7 @@ public class MoveState : State
             stateMachine.Transform.rotation = Quaternion.RotateTowards( stateMachine.Transform.rotation, toRotation, stateMachine.CharacterData.RotationSpeed * Time.deltaTime );
         }
 
-        if ( stateMachine.CharacterController.isGrounded )
+        if ( stateMachine.MoveComponent.IsGrounded() )
         {
             ySpeed = -stateMachine.CharacterData.Gravity;
             if ( Input.GetKeyDown( KeyCode.Space ) )
@@ -60,7 +61,7 @@ public class MoveState : State
 
         Vector3 veritcal = new Vector3( 0, ySpeed, 0 );
 
-        stateMachine.CharacterController.Move( ( direction * inputMagnitude * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
+        stateMachine.MoveComponent.Move( ( direction * inputMagnitude * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
     }
     /*// Start is called before the first frame update
     void Start()
