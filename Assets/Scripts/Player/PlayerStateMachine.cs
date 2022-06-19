@@ -15,11 +15,6 @@ public class PlayerStateMachine : CharacterStateMachine
         characterController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
 
-        statesList = new List<State>()
-        {
-            new MoveState(), new RollOverState()
-        };
-
         moveComponent = new PlayerMoveComponent(characterController);
 
         currentState = statesList.Find(x => x is MoveState);
@@ -30,6 +25,7 @@ public class PlayerStateMachine : CharacterStateMachine
     void Update()
     {
         currentState.UpdateState();
+        characterController.Move( moveComponent.MoveVector * Time.deltaTime );
         ChangeStateLogic();
         /*if (currentState.ShouldExit)
         {

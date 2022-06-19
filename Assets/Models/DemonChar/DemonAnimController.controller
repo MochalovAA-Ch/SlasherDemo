@@ -174,7 +174,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Run
-  m_Speed: 1
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8252549114276700249}
@@ -676,7 +676,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RollOver
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8062120246356164672}
@@ -691,7 +691,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6fc66f4cd7b3cc148a6e062890315da8, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8b5c73435ea290e43a88b46cf9b17cf0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

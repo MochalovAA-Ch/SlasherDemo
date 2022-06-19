@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class MoveComponent
 {
+    protected Vector3 moveVector;
+    public Vector3 MoveVector => moveVector;
+
     public abstract void Move(Vector3 direction);
     public abstract void SetDestination(Vector3 destination);
     public abstract bool IsGrounded();

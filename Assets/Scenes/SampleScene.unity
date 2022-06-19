@@ -1064,7 +1064,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 489d616a89b1e714c871866a3b872ed7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1090,6 +1090,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 00029f03fdc2a914c82087c8f9ca81a4, type: 2}
   cameraTr: {fileID: 146268562}
+  statesList:
+  - {fileID: 283827350}
+  - {fileID: 283827351}
+--- !u!114 &283827350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283827344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373e11a68e2f2fc4f9caed8abc7c0022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShouldExit: 0
+  MoveSpeed: 6
+  JumpForce: 6
+--- !u!114 &283827351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283827344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f293e4bd94525db419f68e375fd169cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShouldExit: 0
+  StartMoveSpeed: 10
+  averageMoveSpeed: 6
 --- !u!1001 &284793248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3638,7 +3671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &838560838
 Transform:
   m_ObjectHideFlags: 0

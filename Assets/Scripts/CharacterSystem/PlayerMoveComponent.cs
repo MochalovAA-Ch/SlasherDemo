@@ -17,7 +17,8 @@ public class PlayerMoveComponent : MoveComponent
 
     public override void Move(Vector3 direction)
     {
-        characterController.Move(direction);
+        moveVector = direction;
+        //characterController.Move(direction);
     }
     public override void SetDestination(Vector3 destination)
     {

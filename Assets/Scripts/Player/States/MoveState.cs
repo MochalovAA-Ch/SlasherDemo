@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class MoveState : State
 {
+    [SerializeField]
+    float MoveSpeed;
+    [SerializeField]
+    float JumpForce;
+
+
     CharacterStateMachine stateMachine;
     float ySpeed;
     public override void OnStateEnter( StateMachine stateMachine )
@@ -49,19 +55,19 @@ public class MoveState : State
             ySpeed = -stateMachine.CharacterData.Gravity;
             if ( Input.GetKeyDown( KeyCode.Space ) )
             {
-                ySpeed = stateMachine.CharacterData.JumpForce;
+                ySpeed = JumpForce;
             }
         }
         else
         {
-            ySpeed -= stateMachine.CharacterData.Gravity;
+            ySpeed -= stateMachine.CharacterData.Gravity* Time.deltaTime;
         }
 
 
 
         Vector3 veritcal = new Vector3( 0, ySpeed, 0 );
 
-        stateMachine.MoveComponent.Move( ( direction * inputMagnitude * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
+        stateMachine.MoveComponent.Move( ( direction * inputMagnitude * MoveSpeed + veritcal ) );
     }
     /*// Start is called before the first frame update
     void Start()

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class RollOverState : State
 {
+    [SerializeField]
+    float StartMoveSpeed;
+
+    [SerializeField]
+    float averageMoveSpeed;
+
+    float speed;
+
     float ySpeed;
     Vector3 direction;
 
@@ -24,6 +32,7 @@ public class RollOverState : State
 
         stateMachine.Animator.SetBool("RollOver", true);
         stateMachine.MoveComponent.MultiplyHeght(0.5f);
+        speed = StartMoveSpeed;
         timer.ResetTimer();
     }
 
@@ -52,6 +61,8 @@ public class RollOverState : State
 
         Vector3 veritcal = new Vector3( 0, ySpeed, 0 );
 
-        stateMachine.MoveComponent.Move( ( direction * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
+        speed = Mathf.Lerp( speed, averageMoveSpeed, 10 * Time.deltaTime );
+
+        stateMachine.MoveComponent.Move( ( direction * speed + veritcal ) );
     }
 }

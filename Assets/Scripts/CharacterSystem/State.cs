@@ -1,5 +1,6 @@
+using UnityEngine;
 
-public abstract class State
+public abstract class State:MonoBehaviour
 {
     public bool ShouldExit;  //Флаг выхода из состояния
     public abstract void UpdateState();
