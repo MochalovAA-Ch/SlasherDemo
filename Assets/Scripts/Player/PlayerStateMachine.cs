@@ -29,8 +29,8 @@ public class PlayerStateMachine : CharacterStateMachine
 
     void Update()
     {
-        ChangeStateLogic();
         currentState.UpdateState();
+        ChangeStateLogic();
         /*if (currentState.ShouldExit)
         {
             ChangeStateLogic();
@@ -65,14 +65,5 @@ public class PlayerStateMachine : CharacterStateMachine
                     ChangeState(statesList.Find(x => x is RollOverState));
             }
         }
-    }
-
-    private void OnAnimatorMove()
-    {
-        Vector3 velocity = anim.deltaPosition;
-        velocity.y = moveComponent.VerticalMovement * Time.deltaTime;
-
-        characterController.Move( velocity );
-        //moveComponent.MoveY()
     }
 }

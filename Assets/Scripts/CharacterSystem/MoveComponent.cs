@@ -4,10 +4,7 @@ using UnityEngine;
 
 public abstract class MoveComponent
 {
-    protected float verticalMovement;
-
-    public float VerticalMovement => verticalMovement;
-    public abstract void MoveY(float val);
+    public abstract void Move(Vector3 direction);
     public abstract void SetDestination(Vector3 destination);
     public abstract bool IsGrounded();
 

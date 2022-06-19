@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735b0b0675f81cc43b2010acaf877d69, type: 3}
   m_Name: CharacterData
   m_EditorClassIdentifier: 
-  HorizontalMoveSpeed: 10
+  HorizontalMoveSpeed: 1
   VerticalMoveSpeed: 0
   Gravity: 10
   RotationSpeed: 400
+  JumpForce: 0

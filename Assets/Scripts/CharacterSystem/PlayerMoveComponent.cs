@@ -7,8 +7,6 @@ public class PlayerMoveComponent : MoveComponent
 
     CharacterController characterController;
     float defaultHeight;
-   
-
     private PlayerMoveComponent() { }
     public PlayerMoveComponent( CharacterController characterController )
     {
@@ -17,10 +15,9 @@ public class PlayerMoveComponent : MoveComponent
     }
 
 
-    public override void MoveY(float val)
+    public override void Move(Vector3 direction)
     {
-        verticalMovement = val;
-        //characterController.Move(direction);
+        characterController.Move(direction);
     }
     public override void SetDestination(Vector3 destination)
     {
@@ -41,6 +38,4 @@ public class PlayerMoveComponent : MoveComponent
         characterController.height = defaultHeight * multiplier;
         //throw new System.NotImplementedException();
     }
-
-    
 }

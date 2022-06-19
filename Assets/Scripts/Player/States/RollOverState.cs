@@ -7,7 +7,7 @@ public class RollOverState : State
     float ySpeed;
     Vector3 direction;
 
-    Timer timer = new Timer( 1f );
+    Timer timer = new Timer( 0.8f );
 
     CharacterStateMachine stateMachine;
     public override void OnStateEnter( StateMachine stateMachine_ )
@@ -52,6 +52,6 @@ public class RollOverState : State
 
         Vector3 veritcal = new Vector3( 0, ySpeed, 0 );
 
-        stateMachine.MoveComponent.MoveY( ySpeed/*( direction * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime */);
+        stateMachine.MoveComponent.Move( ( direction * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
     }
 }
