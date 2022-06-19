@@ -52,6 +52,6 @@ public class RollOverState : State
 
         Vector3 veritcal = new Vector3( 0, ySpeed, 0 );
 
-        stateMachine.MoveComponent.Move( ( direction * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
+        stateMachine.MoveComponent.MoveY( ySpeed/*( direction * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime */);
     }
 }

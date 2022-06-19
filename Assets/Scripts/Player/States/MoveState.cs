@@ -61,7 +61,7 @@ public class MoveState : State
 
         Vector3 veritcal = new Vector3( 0, ySpeed, 0 );
 
-        stateMachine.MoveComponent.Move( ( direction * inputMagnitude * stateMachine.CharacterData.HorizontalMoveSpeed + veritcal ) * Time.deltaTime );
+        stateMachine.MoveComponent.MoveY( ySpeed );
     }
     /*// Start is called before the first frame update
     void Start()

@@ -32,7 +32,10 @@ public class CameraController : MonoBehaviour
 
     void FollowPlayer()
     {
-        transform.position = playerTr.position + offset; 
+
+        transform.position = Vector3.Lerp( transform.position, playerTr.position + offset, 10 * Time.deltaTime );
+
+        //transform.position = playerTr.position + offset; 
     }
 
 }
