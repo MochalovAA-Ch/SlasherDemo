@@ -30,7 +30,8 @@ public abstract class CharacterStateMachine : StateMachine
     {
         anim = GetComponent<Animator>();
         this.moveComponent = moveComponent;
-       // hp = characterData.Health;
+        anim = GetComponent<Animator>();
+        hp = characterData.Health;
     }
 
     // Start is called before the first frame update
