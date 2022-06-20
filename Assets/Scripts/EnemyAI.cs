@@ -28,6 +28,9 @@ public class EnemyAI : MonoBehaviour, IHitable
     float walkSpeed;
     [SerializeField]
     float minDistanceToChase = 1.0f;
+    [SerializeField]
+    AIWeapon weapon;
+
 
     float health;
 
@@ -47,13 +50,17 @@ public class EnemyAI : MonoBehaviour, IHitable
 
     Vector3 offset = Vector3.zero;
 
+    Timer patrolTimer;
+
     private void Awake()
     {
         player = FindObjectOfType<Player>().transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         hpBar = GetComponentInChildren<ProgressBar>();
+        weapon = GetComponentInChildren<AIWeapon>();
         health = maxHealth;
+        patrolTimer = new Timer( 2.0f );
     }
 
     private void Update()
@@ -78,7 +85,16 @@ public class EnemyAI : MonoBehaviour, IHitable
     private void Patroling()
     {
         agent.speed = walkSpeed;
-        if (!walkPointSet) SearchWalkPoint();
+        if (!walkPointSet)
+        {
+            if( patrolTimer.CheckTimer( Time.deltaTime ) )
+            {
+                SearchWalkPoint();
+                patrolTimer.ResetTimer();
+            }
+                
+        }
+            
 
         if (walkPointSet)
             agent.SetDestination(walkPoint);
@@ -114,7 +130,6 @@ public class EnemyAI : MonoBehaviour, IHitable
         agent.speed = runSpeed;
         
         float distance = Vector3.Distance( transform.position, player.position );
-        Debug.Log( "Distance " + distance );
         if ( distance > minDistanceToChase )
         {
             SetAnimState( EnemyAnimStates.CHASE_PLAYER );
@@ -147,6 +162,7 @@ public class EnemyAI : MonoBehaviour, IHitable
            */
             alreadyAttacked = true;
             SetAnimState( EnemyAnimStates.ATTACK );
+            weapon.Attack();
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
         else
@@ -192,7 +208,7 @@ public class EnemyAI : MonoBehaviour, IHitable
         {
             case  EnemyAnimStates.IDLE:
             {
-                anim.SetBool( "Idle", true );
+                anim.SetBool( "Break", true );
                 anim.SetBool( "Run", false );
                 anim.SetBool( "Patrol", false );
                     //anim.SetBool( "Attack", false );
@@ -200,7 +216,7 @@ public class EnemyAI : MonoBehaviour, IHitable
             }
             case EnemyAnimStates.PATROL:
             {
-                anim.SetBool( "Idle", false );
+                anim.SetBool( "Break", false );
                 anim.SetBool( "Attack", false );
                 anim.SetBool( "Run", false );
                 anim.SetBool( "Patrol", true );
@@ -209,7 +225,7 @@ public class EnemyAI : MonoBehaviour, IHitable
             case EnemyAnimStates.CHASE_PLAYER:
             {
                 anim.SetBool( "Patrol", false );
-                anim.SetBool( "Idle", false );
+                anim.SetBool( "Break", false );
                 anim.SetBool( "Attack", false );
                 anim.SetBool( "Run", true );
                 break;

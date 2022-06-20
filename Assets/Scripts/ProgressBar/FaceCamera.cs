@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class FaceCamera : MonoBehaviour
 {
-    public Camera Camera;
+    Camera Camera;
+
+
+    private void Start()
+    {
+        Camera = FindObjectOfType<Camera>();
+    }
 
     private void Update()
     {

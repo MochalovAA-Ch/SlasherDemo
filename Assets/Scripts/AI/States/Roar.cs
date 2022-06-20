@@ -18,7 +18,7 @@ public class Roar : State
     {
         /*if ( activableComp != null )
             activable = activableComp as IActivable;*/
-        activable = activableComp.GetComponent<IActivable>();
+        //activable = activableComp.GetComponent<IActivable>();
 
     }
 

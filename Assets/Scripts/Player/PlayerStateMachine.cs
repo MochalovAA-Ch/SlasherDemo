@@ -9,6 +9,9 @@ public class PlayerStateMachine : CharacterStateMachine
 
     public ProgressBar progressBar;
 
+    public ParticleSystem fireEffect;
+    public ParticleSystem hitEffect;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -20,8 +23,29 @@ public class PlayerStateMachine : CharacterStateMachine
 
     List<SimpleDamage> damageSlots = new List<SimpleDamage>(10);
 
+    Timer healTimer = new Timer( 2 );
+    Timer wasDamageTimer = new Timer( 2 );
     void Update()
     {
+        if ( wasDamage  )
+        {
+            if( wasDamageTimer.CheckTimer( Time.deltaTime ) )
+            {
+                wasDamage = false;
+                wasDamageTimer.ResetTimer();
+            }    
+        }
+        else
+        {
+            if ( healTimer.CheckTimer( Time.deltaTime ) )
+            {
+                hp += 10;
+                hp = Mathf.Clamp( hp, hp, characterData.Health );
+                progressBar.SetProgress( hp / characterData.Health );
+                healTimer.ResetTimer();
+            }
+        }    
+
         OnClick();
 
         currentState.UpdateState();
@@ -82,11 +106,10 @@ public class PlayerStateMachine : CharacterStateMachine
 
     public override void TakeDamage( float damage )
     {
+        wasDamage = true;
         hp -= damage;
         progressBar.SetProgress( hp / characterData.Health );
-
-        Debug.Log( "Taken damage " + damage );
-        Debug.Log( "Remains health" + hp );
+        hitEffect.Play();
     }
 
     void ProcessDamage()
@@ -98,17 +121,55 @@ public class PlayerStateMachine : CharacterStateMachine
 
             damageSlots[i].UpdateDamage();
             if ( damageSlots[i].IsEnded && !damageSlots[i].IsInTrigger )
+            {
+                RemoveDamageEffect( damageSlots[i] );
+
                 damageSlots[i] = null;
+                
+            }
+                
         }
+    }
+
+    void SetDamageEffect( SimpleDamage damage )
+    {
+
+        if ( damage.DamageType == DamageType.FIRE )
+            fireEffect.gameObject.SetActive( true );
+        else if ( damage.DamageType == DamageType.HIT )
+        {
+            hitEffect.Play();
+        }
+
+    }
+
+    void RemoveDamageEffect( SimpleDamage damage )
+    {
+        if ( damage.DamageType == DamageType.FIRE )
+            fireEffect.gameObject.SetActive( false );
     }
 
     void AddDamageToSlots( SimpleDamage damage)
     {
+        for( int i = 0; i < damageSlots.Count; i++ )
+        {
+            SimpleDamage damageTemp = damageSlots[i];
+            if( damageTemp != null )
+            {
+                if ( damageTemp.DamageType == damage.DamageType )
+                    return;
+            }
+
+            
+        }    
+
         if ( damageSlots.Count < 10 )
         {
             if( !damageSlots.Contains( damage ) )
+            {
                 damageSlots.Add( damage );
-
+                SetDamageEffect( damage );
+            }
         }
         else
         {
@@ -116,7 +177,11 @@ public class PlayerStateMachine : CharacterStateMachine
             {
                 for ( int i = 0; i < damageSlots.Count; i++ )
                 {
-                    if ( damageSlots[i] == null ) damageSlots[i] = damage;
+                    if ( damageSlots[i] == null )
+                    {
+                        damageSlots[i] = damage;
+                        SetDamageEffect( damage );
+                    }
                 }
             }
         }
@@ -135,6 +200,7 @@ public class PlayerStateMachine : CharacterStateMachine
         return false;    
     }
 
+    bool wasDamage = false;
     void CheckForStayDamage( Collider other )
     {
         SimpleDamage damage = other.GetComponent<SimpleDamage>();
@@ -153,9 +219,19 @@ public class PlayerStateMachine : CharacterStateMachine
         SimpleDamage damage = other.GetComponent<SimpleDamage>();
         if ( damage != null ) damage.IsInTrigger = false;
     }
-        private void OnTriggerEnter( Collider other )
+    private void OnTriggerEnter( Collider other )
     {
-        CheckForEnterDamage( other );
+        if ( !CheckForEnterDamage( other ) )
+        {
+
+        }
+        else if( other.gameObject.tag == "healthPotion" )
+        {
+            hp += 30;
+            hp = Mathf.Clamp( hp, hp, characterData.Health );
+            progressBar.SetProgress( hp / characterData.Health );
+            other.gameObject.SetActive( false );
+        }
     }
 
     private void OnTriggerStay( Collider other )

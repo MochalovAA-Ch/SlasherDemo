@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum DamageType
+{
+    FIRE,
+    HIT
+}
 public class SimpleDamage : MonoBehaviour
 {
     CharacterStateMachine character;
@@ -13,6 +19,11 @@ public class SimpleDamage : MonoBehaviour
     [SerializeField]
     [Tooltip("С какой периодичностью проходит урон от данного источника")]
     float tick;
+
+    [SerializeField]
+    DamageType damageType;
+
+    public DamageType DamageType => damageType;
 
     float currentTick;
 

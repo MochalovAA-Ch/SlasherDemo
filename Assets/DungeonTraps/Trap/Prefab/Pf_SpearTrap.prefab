@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0
   tick: 5
+  damageType: 1
   damage: 10
   isOverTime: 0
 --- !u!65 &5836864918098559361

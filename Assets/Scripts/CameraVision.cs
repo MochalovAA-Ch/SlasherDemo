@@ -2,6 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+class WallRender
+{
+    public GameObject wall;
+    public Timer timer;
+
+    public WallRender( GameObject wall_ )
+    {
+        wall = wall_;
+        timer = new Timer( 10 );
+    }
+
+}
+
 public class CameraVision : MonoBehaviour
 {
     [SerializeField]
@@ -11,10 +25,34 @@ public class CameraVision : MonoBehaviour
     [SerializeField]
     LayerMask layer;
 
+    List<WallRender> toEnableList;
+
     // Update is called once per frame
     void Update()
     {
         CheckRayCast();
+        CheckWallsToEnabled();
+    }
+
+    private void Start()
+    {
+        toEnableList = new List<WallRender>();
+    }
+
+    void CheckWallsToEnabled()
+    {
+        for( int i = 0; i < toEnableList.Count; i++ )
+        {
+            if( toEnableList[i] != null )
+            {
+                if ( toEnableList[i].timer.CheckTimer( Time.deltaTime ) )
+                {
+                    SetEnabledMeshRenderer( true, toEnableList[i].wall );
+                    toEnableList[i] = null;
+                }
+                    
+            }
+        }
     }
 
     void CheckRayCast()
@@ -52,16 +90,16 @@ public class CameraVision : MonoBehaviour
         previousTarget = currentTarget;
     }
 
-    void SetEnabledMeshRenderer( bool val, Collider collider)
+    void SetEnabledMeshRenderer( bool val, GameObject gameObject)
     {
-        MeshRenderer meshRenderer = collider.GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
         if ( meshRenderer )
             meshRenderer.enabled = val;
     }
 
     void OnRayEnter( Collider collider )
     {
-        SetEnabledMeshRenderer( false, collider );
+        SetEnabledMeshRenderer( false, collider.gameObject );
         /*Enemy enemy = collider.GetComponent<Enemy>();
         if ( enemy != null )
             enemy.SetTargetMaterial();*/
@@ -69,6 +107,26 @@ public class CameraVision : MonoBehaviour
 
     void OnRayExit( Collider collider )
     {
-        SetEnabledMeshRenderer( true, collider );
+        WallRender wall = toEnableList.Find( x => x.wall == collider.gameObject );
+        if( wall != null )
+        {
+            wall.timer.ResetTimer();
+        }
+        else
+        {
+            bool isAdded = false;
+            for ( int i = 0; i < toEnableList.Count; i++ )
+            {
+                if ( toEnableList[i] == null )
+                {
+                    toEnableList.Add( new WallRender( collider.gameObject  ) );
+                }
+            }
+
+            if ( !isAdded )
+                toEnableList.Add( new WallRender( collider.gameObject ) );
+        }
+
+        //SetEnabledMeshRenderer( true, collider );
     }
 }

@@ -17,4 +17,4 @@ MonoBehaviour:
   Gravity: 15
   RotationSpeed: 400
   JumpForce: 0
-  Health: 100
+  Health: 200
