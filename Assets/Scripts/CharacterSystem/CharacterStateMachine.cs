@@ -8,9 +8,10 @@ public abstract class CharacterStateMachine : StateMachine
     protected CharacterData characterData;
     [SerializeField]
     protected Transform cameraTr;
-
     [SerializeField]
     protected List<State> statesList;
+
+    protected float hp;
 
     protected MoveComponent moveComponent;
     protected Animator anim;
@@ -29,6 +30,7 @@ public abstract class CharacterStateMachine : StateMachine
     {
         anim = GetComponent<Animator>();
         this.moveComponent = moveComponent;
+       // hp = characterData.Health;
     }
 
     // Start is called before the first frame update
@@ -42,5 +44,7 @@ public abstract class CharacterStateMachine : StateMachine
     {
         
     }
-    //void Chan
+
+
+    public abstract void TakeDamage( float damage );
 }

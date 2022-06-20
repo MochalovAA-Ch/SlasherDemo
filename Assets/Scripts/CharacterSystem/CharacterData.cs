@@ -10,4 +10,5 @@ public class CharacterData : ScriptableObject
     public int Gravity;
     public int RotationSpeed;
     public int JumpForce;
+    public float Health;
 }
