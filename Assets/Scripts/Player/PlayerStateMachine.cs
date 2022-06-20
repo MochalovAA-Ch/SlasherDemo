@@ -11,12 +11,8 @@ public class PlayerStateMachine : CharacterStateMachine
 
     private void Start()
     {
-        //Init();
         characterController = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
-        hp = characterData.Health;
-        moveComponent = new PlayerMoveComponent(characterController);
-
+        Init( new PlayerMoveComponent( characterController ) );
         currentState = statesList.Find(x => x is MoveState);
         currentState.OnStateEnter(this);
     }

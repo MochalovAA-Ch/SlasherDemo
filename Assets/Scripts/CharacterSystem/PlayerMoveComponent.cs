@@ -15,12 +15,12 @@ public class PlayerMoveComponent : MoveComponent
     }
 
 
-    public override void Move(Vector3 direction)
+    public override void Move( Vector3 direction )
     {
         moveVector = direction;
         //characterController.Move(direction);
     }
-    public override void SetDestination(Vector3 destination)
+    public override void SetDestination( Vector3 destination )
     {
         throw new System.NotImplementedException();
     }
@@ -33,6 +33,11 @@ public class PlayerMoveComponent : MoveComponent
     {
         characterController.height = defaultHeight;
     }
+
+    public override void SetSpeed(float speed)
+    {
+        throw new System.NotImplementedException();
+    }  
 
     public override void MultiplyHeght(float multiplier)
     {

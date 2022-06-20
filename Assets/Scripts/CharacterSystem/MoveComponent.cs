@@ -8,11 +8,12 @@ public abstract class MoveComponent
     public Vector3 MoveVector => moveVector;
 
     public abstract void Move(Vector3 direction);
+
+    public abstract void SetSpeed( float speed );
     public abstract void SetDestination(Vector3 destination);
     public abstract bool IsGrounded();
 
     public abstract void SetDefaultHeight();
-
     public abstract void MultiplyHeght( float multiplier );
 
 }
