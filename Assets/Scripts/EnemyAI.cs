@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour, IHitable
 
     private void Awake()
     {
-        player = FindObjectOfType<Player>().transform;
+        player = FindObjectOfType<PlayerStateMachine>().transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         hpBar = GetComponentInChildren<ProgressBar>();

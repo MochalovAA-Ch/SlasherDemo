@@ -13,7 +13,7 @@ public class PlayerWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerTr = FindObjectOfType<Player>().transform;
+        playerTr = FindObjectOfType<PlayerStateMachine>().transform;
         animator = playerTr.GetComponent<Animator>();
     }
 

@@ -1836,7 +1836,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d4fc17d3516994a8f55a6712ca6cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPotion: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1
@@ -1847,7 +1846,7 @@ MonoBehaviour:
   runSpeed: 4
   walkSpeed: 2
   minDistanceToChase: 1
-  weapon: {fileID: 0}
+  weapon: {fileID: 1446172299}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 2
   timeBetweenAttacks: 2

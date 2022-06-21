@@ -12,6 +12,8 @@ public class PlayerStateMachine : CharacterStateMachine
     public ParticleSystem fireEffect;
     public ParticleSystem hitEffect;
 
+    public GameController gameController;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -110,6 +112,14 @@ public class PlayerStateMachine : CharacterStateMachine
         hp -= damage;
         progressBar.SetProgress( hp / characterData.Health );
         hitEffect.Play();
+
+        if( hp <= 0 )
+        {
+            gameController.SetDefeatInfo();
+            this.enabled = false;
+        }
+
+
     }
 
     void ProcessDamage()
